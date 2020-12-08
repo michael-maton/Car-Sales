@@ -7,7 +7,7 @@ import Total from './components/Total';
 
 import { connect } from "react-redux";
 
-import { addPart } from "./actions";
+import { addPart, removePart } from "./actions";
 
 const App = (props) => {
   const state = {
@@ -21,19 +21,22 @@ const App = (props) => {
     // },
   };
 
-  const handleClick = (value) => {
-    console.log(value);
-    props.addPart(value);
+  const handleAddFeature = (feature) => {
+    props.addPart(feature);
   };
+  const handleRemoveFeature = (feature) => {
+    props.removePart(feature);
+  };
+  console.log(props.car.features);
 
   return (
     <div className="boxes">
       <div className="box">
         <Header car={props.car} />
-        <AddedFeatures car={props.car} />
+        <AddedFeatures car={props.car} handleRemoveFeature={handleRemoveFeature} />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={props.additionalFeatures} handleClick={handleClick} />
+        <AdditionalFeatures additionalFeatures={props.additionalFeatures} handleAddFeature={handleAddFeature} />
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
@@ -46,4 +49,4 @@ const mapStateToProps = (state) => {
     additionalFeatures: state.additionalFeatures
   }
 };
-export default connect(mapStateToProps, { addPart })(App);
+export default connect(mapStateToProps, { addPart, removePart })(App);

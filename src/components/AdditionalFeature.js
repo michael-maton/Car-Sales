@@ -1,11 +1,9 @@
 import React from "react";
-import { addPart } from "./../actions/index";
 
 const AdditionalFeature = (props) => {
 
   const handleNew = () => {
-    console.log(props.feature);
-    props.handleClick(props.feature);
+    props.handleAddFeature(props.feature);
   };
 
   return (
